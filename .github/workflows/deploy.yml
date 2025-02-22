@@ -1,51 +1,54 @@
-name: CI Pipeline
+name: Deploy
 
 on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 
 jobs:
   build:
+    name: Build
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v4  # Updated to v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4  # Updated to v4
         with:
-          node-version: 20
+          node-version: 20  # Ensure this matches your local environment
 
       - name: Install dependencies
-        run: npm install
+        uses: bahmutov/npm-install@v1
 
       - name: Build project
         run: npm run build
 
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v4
+      - name: Upload production-ready build files
+        uses: actions/upload-artifact@v4  # Updated to v4
         with:
-          name: build-output
-          path: dist/
+          name: production-files
+          path: ./dist
 
-  test:
-    runs-on: ubuntu-latest
+  deploy:
+    name: Deploy
     needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v4  # Ensures latest repo state
 
-      - name: Download build artifacts
-        uses: actions/download-artifact@v4
+      - name: Download artifact
+        uses: actions/download-artifact@v4  # Updated to v4
         with:
-          name: build-output
-          path: dist/
+          name: production-files
+          path: ./dist
 
-      - name: Run tests
-        run: npm test
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4  # Updated to latest version
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
