@@ -1,4 +1,6 @@
 import box from "../components/box.jpg"
+import hist from "../components/Histogram.png"
+import line from "../components/lineChart.png"
 
 // import React, { useState } from "react";
 // import styles from "./GraphVisualizer.module.css";
@@ -517,11 +519,6 @@ import box from "../components/box.jpg"
 
 
 
-
-
-
-
-
 import React, { useState } from "react";
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, PieChart, Pie, LineChart, Line, Cell, CartesianGrid,
@@ -572,12 +569,9 @@ const GraphVisualizer = () => {
 
       <Paper sx={{ padding: 2, display: "flex", justifyContent: "center" }}>
         {selectedGraph === "histogram" && (
-          <BarChart width={500} height={300} data={computeFrequency(dataset)}>
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip />
-            <Bar dataKey="value" fill="#8884d8" />
-          </BarChart>
+          <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", width: 500, height: 300 }}>
+            <img src={hist} alt="Histogram Placeholder" style={{ maxWidth: "100%", maxHeight: "100%" }} />
+          </Box>
         )}
 
         {selectedGraph === "bar" && (
@@ -600,13 +594,9 @@ const GraphVisualizer = () => {
         )}
 
         {selectedGraph === "line" && (
-          <LineChart width={500} height={300} data={computeFrequency(dataset)}>
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip />
-            <CartesianGrid stroke="#ccc" />
-            <Line type="monotone" dataKey="value" stroke="green" />
-          </LineChart>
+          <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", width: 500, height: 300 }}>
+            <img src={line} alt="Line Chart Placeholder" style={{ maxWidth: "100%", maxHeight: "100%" }} />
+          </Box>
         )}
 
         {selectedGraph === "polygon" && (
@@ -653,3 +643,165 @@ const GraphVisualizer = () => {
 };
 
 export default GraphVisualizer;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { useState } from "react";
+// import {
+//   BarChart, Bar, XAxis, YAxis, Tooltip, PieChart, Pie, LineChart, Line, Cell, CartesianGrid,
+// } from "recharts";
+// import { Button, Box, Typography, Paper } from "@mui/material";
+
+// const dataset = [10, 15, 18, 22, 30, 35, 40, 45, 50, 55, 60, 10, 30, 45];
+// const pieColors = ["#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF", "#FF4500", "#228B22"];
+
+// const computeFrequency = (data) => {
+//   let freqMap = {};
+//   data.forEach(num => {
+//     if (typeof num === "number" && !isNaN(num)) {
+//       freqMap[num] = (freqMap[num] || 0) + 1;
+//     }
+//   });
+
+//   return Object.entries(freqMap).map(([value, count]) => ({
+//     name: value,
+//     value: count
+//   }));
+// };
+
+// const GraphVisualizer = () => {
+//   const [selectedGraph, setSelectedGraph] = useState("histogram");
+
+//   return (
+//     <Box sx={{ padding: 2, textAlign: "center" }}>
+//       <Typography variant="h5" gutterBottom>
+//         📊 Graph Visualizer
+//       </Typography>
+
+//       <Typography variant="h6">
+//         Data: {dataset.sort((a, b) => a - b).join(", ")}
+//       </Typography>
+
+//       <Box sx={{ margin: 2, display: "flex", gap: 1, justifyContent: "center", flexWrap: "wrap" }}>
+//         {["histogram", "bar", "pie", "line", "polygon", "box", "stemLeaf"].map(graph => (
+//           <Button
+//             key={graph}
+//             variant={selectedGraph === graph ? "contained" : "outlined"}
+//             onClick={() => setSelectedGraph(graph)}
+//           >
+//             {graph.charAt(0).toUpperCase() + graph.slice(1)} Chart
+//           </Button>
+//         ))}
+//       </Box>
+
+//       <Paper sx={{ padding: 2, display: "flex", justifyContent: "center" }}>
+//         {selectedGraph === "histogram" && (
+//           <BarChart width={500} height={300} data={computeFrequency(dataset)}>
+//             <XAxis dataKey="name" />
+//             <YAxis />
+//             <Tooltip />
+//             <Bar dataKey="value" fill="#8884d8" />
+//           </BarChart>
+//         )}
+
+//         {selectedGraph === "bar" && (
+//           <BarChart width={500} height={300} data={computeFrequency(dataset)}>
+//             <XAxis dataKey="name" />
+//             <YAxis />
+//             <Tooltip />
+//             <Bar dataKey="value" fill="#ff7300" />
+//           </BarChart>
+//         )}
+
+//         {selectedGraph === "pie" && (
+//           <PieChart width={400} height={400}>
+//             <Pie data={computeFrequency(dataset)} dataKey="value" cx="50%" cy="50%" outerRadius={100} label>
+//               {computeFrequency(dataset).map((_, index) => (
+//                 <Cell key={`cell-${index}`} fill={pieColors[index % pieColors.length]} />
+//               ))}
+//             </Pie>
+//           </PieChart>
+//         )}
+
+//         {selectedGraph === "line" && (
+//           <LineChart width={500} height={300} data={computeFrequency(dataset)}>
+//             <XAxis dataKey="name" />
+//             <YAxis />
+//             <Tooltip />
+//             <CartesianGrid stroke="#ccc" />
+//             <Line type="monotone" dataKey="value" stroke="green" />
+//           </LineChart>
+//         )}
+
+//         {selectedGraph === "polygon" && (
+//           <LineChart width={500} height={300} data={computeFrequency(dataset)}>
+//             <XAxis dataKey="name" />
+//             <YAxis />
+//             <Tooltip />
+//             <Line type="monotone" dataKey="value" stroke="blue" />
+//           </LineChart>
+//         )}
+
+//         {selectedGraph === "box" && (
+//           <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", width: 500, height: 300 }}>
+//             <img src={box} alt="Box Plot Placeholder" style={{ maxWidth: "100%", maxHeight: "100%" }} />
+//           </Box>
+//         )}
+
+//         {selectedGraph === "stemLeaf" && (() => {
+//           let stemLeaf = {};
+//           dataset.sort((a, b) => a - b).forEach(num => {
+//             let stem = Math.floor(num / 10);
+//             let leaf = num % 10;
+//             if (!stemLeaf[stem]) stemLeaf[stem] = [];
+//             stemLeaf[stem].push(leaf);
+//           });
+
+//           return (
+//             <Box sx={{ textAlign: "left" }}>
+//               <Typography variant="h6">Stem-and-Leaf Plot</Typography>
+//               <Typography variant="body2" sx={{ fontStyle: "italic" }}>
+//                 Key: 1 | 0 means 25
+//               </Typography>
+//               {Object.keys(stemLeaf).map(stem => (
+//                 <Typography key={stem}>
+//                   <b>{stem} |</b> {stemLeaf[stem].join(" ")}
+//                 </Typography>
+//               ))}
+//             </Box>
+//           );
+//         })()}
+//       </Paper>
+//     </Box>
+//   );
+// };
+
+// export default GraphVisualizer;
