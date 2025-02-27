@@ -1,6 +1,6 @@
 import box from "../components/box.jpg"
 import hist from "../components/Histogram.png"
-import line from "../components/lineChart.png"
+import line from "../components/LineChart.png"
 
 // import React, { useState } from "react";
 // import styles from "./GraphVisualizer.module.css";
